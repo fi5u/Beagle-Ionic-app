@@ -21,7 +21,6 @@ export class WebsitesPage {
         this.itemSelected = [];
         this.itemQuery = [];
         this.websiteStorage = websiteStorage;
-        this.websiteStorage.initializeStorage();
 
         events.subscribe('website:added', (website) => {
             this.items.push(website[0]);

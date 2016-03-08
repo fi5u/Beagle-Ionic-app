@@ -2,18 +2,20 @@ import {App, IonicApp, Platform} from 'ionic-angular';
 import {GettingStartedPage} from './pages/getting-started/getting-started';
 import {ListPage} from './pages/list/list';
 import {WebsitesPage} from './pages/websites/websites';
-
+import {WebsiteStorageService} from './storage/website-storage';
 
 @App({
   templateUrl: 'build/app.html',
-  config: {} // http://ionicframework.com/docs/v2/api/config/Config/
+  config: {}, // http://ionicframework.com/docs/v2/api/config/Config/
+  providers: [WebsiteStorageService]
 })
 class MyApp {
   rootPage: any = WebsitesPage;
   pages: Array<{title: string, component: any}>
 
-  constructor(private app: IonicApp, private platform: Platform) {
+  constructor(private app: IonicApp, private platform: Platform, private websiteStorage: WebsiteStorageService) {
     this.initializeApp();
+    websiteStorage.initializeStorage();
 
     // used for an example of ngFor and navigation
     this.pages = [
