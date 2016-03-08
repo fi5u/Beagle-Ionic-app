@@ -1,0 +1,57 @@
+<ion-navbar *navbar>
+    <ion-buttons start>
+        <button (click)="cancelModal()" small>
+            Cancel
+        </button>
+    </ion-buttons>
+
+    <ion-title>Website</ion-title>
+
+    <ion-buttons end>
+        <button (click)="saveData()" [disabled]="!form.valid">
+            Save
+        </button>
+    </ion-buttons>
+</ion-navbar>
+
+<form [ngFormModel]="form">
+    <!-- <ion-segment ngControl="editType">
+        <ion-segment-button value="auto">Auto</ion-segment-button>
+        <ion-segment-button value="custom">Custom</ion-segment-button>
+    </ion-segment> -->
+
+    <!-- <div [ngSwitch]="true">
+        <div *ngSwitchWhen="'auto'">
+            Auto
+        </div> -->
+
+        <!-- <div *ngSwitchWhen="true"> -->
+
+            <ion-list id="websites-list">
+                <ion-item>
+                    <ion-label floating>Title</ion-label>
+                    <ion-input type="text" [(ngModel)]="item.title" ngControl="title"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label floating>Website address</ion-label>
+                    <ion-input type="url" [(ngModel)]="item.url" ngControl="url"></ion-input>
+                </ion-item>
+            </ion-list>
+
+            <ion-list>
+                <ion-list-header (click)="advancedSectionToggle()">
+                    Advanced
+                    <ion-icon name="arrow-{{advancedSection.isOpen ? 'up' : 'down'}}" item-right></ion-icon>
+                </ion-list-header>
+
+                <ion-item [hidden]="!advancedSection.isOpen">
+                    <ion-label>Symbol to represent space</ion-label>
+                    <ion-select [(ngModel)]="item.spaceSymbol" ngControl="spaceSymbol" (focus)="advancedSectionToggle(true)">
+                        <ion-option value="+">+</ion-option>
+                        <ion-option value="%20">%20</ion-option>
+                    </ion-select>
+                </ion-item>
+            </ion-list>
+        <!-- </div> -->
+    <!-- </div> -->
+</form>
