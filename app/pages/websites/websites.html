@@ -17,15 +17,15 @@
 <ion-content>
     <ion-list id="websites">
         <ion-item-sliding *ngFor="#item of items; var i = index;">
-            <button ion-item (click)="itemTapped($event, item, i)" detail-none>
+            <ion-item (click)="itemTapped($event, item, i)" detail-none>
+                <button item-right clear (click)="sendQuery($event, i)" [disabled]="!itemQuery[i]" [hidden]="!itemSelected[i]">
+                    <ion-icon name="arrow-dropright-circle"></ion-icon>
+                </button>
                 {{item.title}}
                 <div *ngIf="itemSelected[i]">
                     <ion-input type="text" placeholder="Search" [(ngModel)]="itemQuery[i]" (keyup.space)="queryInput($event)" bglAutoFocus></ion-input>
-                    <a clear item-right (click)="sendQuery($event, i)">
-                        <ion-icon name="arrow-dropright-circle"></ion-icon>
-                    </a>
                 </div>
-            </button>
+            </ion-item>
             <ion-item-options>
                 <button (click)="editWebsite(item)">Edit</button>
                 <button (click)="deleteWebsite(item.id)">Delete</button>

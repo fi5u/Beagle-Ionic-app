@@ -33,10 +33,8 @@ export class WebsiteStorageService {
                 }
             }
             this.events.publish('websites:all', this.data);
-            //resolve(this.data);
         }, (error) => {
             console.log(error);
-            //reject(error.err);
         });
     }
 
