@@ -80,7 +80,7 @@ export class WebsitesPage {
     }
 
     itemTapped(event, item, i) {
-        if (!this.itemSelected[i]) this.itemSelected = [];
+        if (!this.itemSelected[i]) { this.itemSelected = []; }
         this.itemSelected[i] = this.itemSelected[i] ? false : true;
         this.list.enableSlidingItems(!this.itemSelected[i]);
     }

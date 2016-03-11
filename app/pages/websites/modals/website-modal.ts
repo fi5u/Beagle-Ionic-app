@@ -1,9 +1,11 @@
 import {Page, ViewController} from 'ionic-angular';
 import {Validators, FormBuilder, Control} from 'angular2/common';
 import {BglValidators} from '../../../utils/validators';
+import {HttpPrefixDirective} from '../../../utils/directives/http-prefix.directive';
 
 @Page({
     templateUrl: 'build/pages/websites/modals/website-modal.html',
+    directives: [HttpPrefixDirective],
     providers: [BglValidators]
 })
 export class WebsiteModal {
