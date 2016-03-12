@@ -1,26 +1,34 @@
 import {Page, ViewController} from 'ionic-angular';
-import {Validators, FormBuilder, Control} from 'angular2/common';
+import {Control, FormBuilder, Validators} from 'angular2/common';
+import {AutoUrlService} from '../services/auto-url.service';
 import {BglValidators} from '../../../utils/validators';
 import {HttpPrefixDirective} from '../../../utils/directives/http-prefix.directive';
 
 @Page({
     templateUrl: 'build/pages/websites/modals/website-modal.html',
     directives: [HttpPrefixDirective],
-    providers: [BglValidators]
+    providers: [BglValidators, AutoUrlService]
 })
 export class WebsiteModal {
-    form: any;
+    autoForm: any;
+    customForm: any;
     viewCtrl: any;
     item: any;
     itemOriginal: any;
     advancedSection: { isOpen: boolean };
+    autoUrlService: any;
 
-    constructor(viewCtrl: ViewController, fb: FormBuilder, bglValidators: BglValidators) {
+    constructor(viewCtrl: ViewController, fb: FormBuilder, bglValidators: BglValidators, autoUrlService: AutoUrlService) {
         this.viewCtrl = viewCtrl;
         this.item = viewCtrl.data;
+        this.autoUrlService = autoUrlService;
         this.itemOriginal = JSON.parse(JSON.stringify(this.item));
 
-        this.form = fb.group({
+        this.autoForm = fb.group({
+            'autoUrl': ['', Validators.compose([Validators.required, bglValidators.weburl])]
+        });
+
+        this.customForm = fb.group({
             'title': ['', Validators.required],
             'url': ['', Validators.compose([Validators.required, bglValidators.weburl])],
             'spaceSymbol': ['', Validators.required]
@@ -68,5 +76,19 @@ export class WebsiteModal {
 
     advancedSectionToggle(open) {
         this.advancedSection.isOpen = !this.advancedSection.isOpen || open ? true : false;
+    }
+
+    fetchAutoUrl(url) {
+        this.autoUrlService.fetchUrl(url).subscribe(
+            data => {
+                console.log(data);
+            },
+            err => {
+                console.log(err);
+            },
+            () => {
+                console.log('Auto fetch URL complete');
+            }
+        );
     }
 }

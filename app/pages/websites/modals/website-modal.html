@@ -8,25 +8,33 @@
     <ion-title>Website</ion-title>
 
     <ion-buttons end>
-        <button (click)="saveData()" [disabled]="!form.valid">
+        <button (click)="saveData()" [disabled]="!customForm.valid && !autoForm.valid">
             Save
         </button>
     </ion-buttons>
 </ion-navbar>
 
-<form [ngFormModel]="form">
+<form>
     <ion-segment [(ngModel)]="item.editType">
         <ion-segment-button value="auto">Auto</ion-segment-button>
         <ion-segment-button value="custom">Custom</ion-segment-button>
     </ion-segment>
 
     <div [ngSwitch]="item.editType">
-        <div *ngSwitchWhen="'auto'">
-            Auto
+        <div *ngSwitchWhen="'auto'" [ngFormModel]="autoForm">
+            <ion-list>
+                <button item-right clear (click)="fetchAutoUrl(item.autoUrl)" [disabled]="!item.autoUrl">
+                    <ion-icon name="arrow-dropright-circle"></ion-icon>
+                </button>
+                <ion-item>
+                    <ion-label floating>Website address</ion-label>
+                    <ion-input type="url" [(ngModel)]="item.autoUrl" ngControl="autoUrl" bglHttpPrefix></ion-input>
+                </ion-item>
+            </ion-list>
         </div>
 
-        <div *ngSwitchWhen="'custom'">
-            <ion-list id="websites-list">
+        <div *ngSwitchWhen="'custom'" [ngFormModel]="customForm">
+            <ion-list>
                 <ion-item>
                     <ion-label floating>Title</ion-label>
                     <ion-input type="text" [(ngModel)]="item.title" ngControl="title"></ion-input>
