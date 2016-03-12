@@ -21,7 +21,6 @@ export class WebsiteModal {
         this.itemOriginal = JSON.parse(JSON.stringify(this.item));
 
         this.form = fb.group({
-            //'editType': ['', Validators.required],
             'title': ['', Validators.required],
             'url': ['', Validators.compose([Validators.required, bglValidators.weburl])],
             'spaceSymbol': ['', Validators.required]
@@ -36,6 +35,9 @@ export class WebsiteModal {
     setDefaults() {
         let defaultFields = [
             {
+                fieldKey: 'editType',
+                fieldVal: 'auto'
+            }, {
                 fieldKey: 'spaceSymbol',
                 fieldVal: '+'
             }
