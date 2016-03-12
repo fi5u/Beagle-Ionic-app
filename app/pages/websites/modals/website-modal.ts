@@ -81,7 +81,12 @@ export class WebsiteModal {
     fetchAutoUrl(url) {
         this.autoUrlService.fetchUrl(url).subscribe(
             data => {
-                console.log(data);
+                if(data.status === 'success') {
+                    console.log(data);
+                }
+                else {
+                    console.log('Failed: ' + data.status);
+                }
             },
             err => {
                 console.log(err);

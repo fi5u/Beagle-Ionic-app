@@ -13,7 +13,18 @@ export class AutoUrlService {
     }
 
     fetchUrl(url) {
-        const fetchPath = this.config.get('pathAutoLocal') + '?url=' + encodeURI(url);
-        return this.http.get(fetchPath).map(res => res.json());
+        let fetchPath;
+        if(this.config.get('isProduction')) {
+            fetchPath = this.config.get('pathAutoRemote');
+        }
+        else {
+            fetchPath = this.config.get('pathAutoLocal');
+        }
+        const compiledFetchPath = fetchPath + '?url=' + encodeURI(url);
+        return this.http.get(compiledFetchPath).map(res => res.json());
+    }
+
+    getUrlTemplate() {
+
     }
 }

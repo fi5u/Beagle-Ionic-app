@@ -5,12 +5,13 @@ import {WebsitesPage} from './pages/websites/websites';
 import {WebsiteStorageService} from './storage/website-storage';
 
 @App({
-  templateUrl: 'build/app.html',
-  config: {
-     pathAutoLocal: 'http://dev.beagle/utils/autotemplate.php',
-     pathAutoRemote: 'https://utils.d24studio.com/beagle/autotemplate.php'
-  }, // http://ionicframework.com/docs/v2/api/config/Config/
-  providers: [WebsiteStorageService]
+    templateUrl: 'build/app.html',
+    config: {
+        isProduction: false,
+        pathAutoLocal: 'http://dev.beagle/utils/autotemplate.php',
+        pathAutoRemote: 'https://utils.d24studio.com/beagle/autotemplate.php'
+    }, // http://ionicframework.com/docs/v2/api/config/Config/
+    providers: [WebsiteStorageService]
 })
 class MyApp {
   rootPage: any = WebsitesPage;
