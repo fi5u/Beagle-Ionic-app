@@ -7,9 +7,12 @@ import {WebsiteStorageService} from './storage/website-storage';
 @App({
     templateUrl: 'build/app.html',
     config: {
-        isProduction: false,
-        pathAutoLocal: 'http://dev.beagle/utils/autotemplate.php',
-        pathAutoRemote: 'https://utils.d24studio.com/beagle/autotemplate.php'
+        developmentMode: 'dev', // dev / prod
+        pathAuto: {
+            dev: 'http://dev.beagle/utils/autotemplate.php',
+            prod: 'https://utils.d24studio.com/beagle/autotemplate.php'
+        },
+        searchPlaceholder: '[?]'
     }, // http://ionicframework.com/docs/v2/api/config/Config/
     providers: [WebsiteStorageService]
 })

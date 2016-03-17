@@ -51,7 +51,7 @@ export class WebsiteModal {
             }
         ];
 
-        for (var field in defaultFields) {
+        for(var field in defaultFields) {
             // Only apply the default if no value already
             if (!this.item[defaultFields[field].fieldKey]) {
                 this.item[defaultFields[field].fieldKey] = defaultFields[field].fieldVal;
@@ -62,7 +62,7 @@ export class WebsiteModal {
     cancelModal() {
         let thisItem = this.item;
         // Loop through items and reassign to original values
-        for (var key in thisItem) {
+        for(var key in thisItem) {
             if (thisItem.hasOwnProperty(key)) {
                 thisItem[key] = this.itemOriginal[key];
             }
@@ -82,7 +82,8 @@ export class WebsiteModal {
         this.autoUrlService.fetchUrl(url).subscribe(
             data => {
                 if(data.status === 'success') {
-                    console.log(data);
+                    const template = this.autoUrlService.getUrlTemplate(data);
+                    Object.assign(this.item, template);
                 }
                 else {
                     console.log('Failed: ' + data.status);

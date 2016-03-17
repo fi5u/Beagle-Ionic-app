@@ -1,4 +1,4 @@
-import {Events, IonicApp, Modal, NavController, NavParams, Page, Platform} from 'ionic-angular';
+import {Config, Events, IonicApp, Modal, NavController, NavParams, Page, Platform} from 'ionic-angular';
 import {WebsiteModal} from './modals/website-modal';
 import {AutoFocusDirective} from '../../utils/directives/auto-focus.directive';
 import {WebsiteStorageService} from '../../storage/website-storage';
@@ -14,7 +14,7 @@ export class WebsitesPage {
     items: Array<{ id: number, title: string, url: string, spaceSymbol: string }>;
     list: any;
 
-    constructor(private app: IonicApp, private nav: NavController, private events: Events, private platform: Platform, public websiteStorage: WebsiteStorageService) {
+    constructor(private app: IonicApp, private config: Config, private nav: NavController, private events: Events, private platform: Platform, public websiteStorage: WebsiteStorageService) {
         this.app = app;
         this.nav = nav;
         this.items = [];
@@ -80,9 +80,11 @@ export class WebsitesPage {
     }
 
     itemTapped(event, item, i) {
-        if (!this.itemSelected[i]) { this.itemSelected = []; }
-        this.itemSelected[i] = this.itemSelected[i] ? false : true;
-        this.list.enableSlidingItems(!this.itemSelected[i]);
+        window.setTimeout(() => { // avoid dehydrated detector
+            if (!this.itemSelected[i]) { this.itemSelected = []; }
+            this.itemSelected[i] = this.itemSelected[i] ? false : true;
+            this.list.enableSlidingItems(!this.itemSelected[i]);
+        });
     }
 
     queryInput(event) {
@@ -91,8 +93,8 @@ export class WebsitesPage {
     }
 
     sendQuery(event, i) {
-        let query = this.itemQuery[i].trim().replace(' ', this.items[i].spaceSymbol || '+');
-        let url = this.items[i].url + '?' + query;
+        const query = this.itemQuery[i].trim().replace(' ', this.items[i].spaceSymbol || '+');
+        const url = this.items[i].url.replace(this.config.get('searchPlaceholder'), query);
         event.stopPropagation();
         console.log('Clicked: ' + i + ' - ' + this.itemQuery[i]);
         window.open(url, '_system', 'location=yes,enableViewportScale=yes');
