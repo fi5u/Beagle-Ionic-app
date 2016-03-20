@@ -23,12 +23,12 @@
     <div [ngSwitch]="item.editType">
         <div *ngSwitchWhen="'auto'" [ngFormModel]="autoForm">
             <ion-list>
-                <button item-right clear (click)="fetchAutoUrl(item.autoUrl)" [disabled]="!item.autoUrl">
+                <button item-right clear (click)="fetchAutoUrl(item.autoUrl)" [disabled]="!item.autoUrl || searchInProgress">
                     <ion-icon name="arrow-dropright-circle"></ion-icon>
                 </button>
                 <ion-item>
                     <ion-label floating>Website address</ion-label>
-                    <ion-input type="url" [(ngModel)]="item.autoUrl" ngControl="autoUrl" bglHttpPrefix></ion-input>
+                    <ion-input type="url" [(ngModel)]="item.autoUrl" ngControl="autoUrl" [disabled]="searchInProgress" bglHttpPrefix></ion-input>
                 </ion-item>
             </ion-list>
         </div>

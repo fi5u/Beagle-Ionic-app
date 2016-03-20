@@ -15,6 +15,7 @@ export class WebsiteModal {
     viewCtrl: any;
     item: any;
     itemOriginal: any;
+    searchInProgress: boolean;
     advancedSection: { isOpen: boolean };
     autoUrlService: any;
 
@@ -23,6 +24,7 @@ export class WebsiteModal {
         this.item = viewCtrl.data;
         this.autoUrlService = autoUrlService;
         this.itemOriginal = JSON.parse(JSON.stringify(this.item));
+        this.searchInProgress = false;
 
         this.autoForm = fb.group({
             'autoUrl': ['', Validators.compose([Validators.required, bglValidators.weburl])]
@@ -79,11 +81,15 @@ export class WebsiteModal {
     }
 
     fetchAutoUrl(url) {
+        window.setTimeout(() => {
+            this.searchInProgress = true;
+        });
         this.autoUrlService.fetchUrl(url).subscribe(
             data => {
                 if(data.status === 'success') {
                     const template = this.autoUrlService.getUrlTemplate(data);
                     Object.assign(this.item, template);
+                    this.saveData();
                 }
                 else {
                     console.log('Failed: ' + data.status);
@@ -93,6 +99,7 @@ export class WebsiteModal {
                 console.log(err);
             },
             () => {
+                this.searchInProgress = false;
                 console.log('Auto fetch URL complete');
             }
         );
