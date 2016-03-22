@@ -45,9 +45,6 @@ export class WebsiteModal {
     setDefaults() {
         let defaultFields = [
             {
-                fieldKey: 'editType',
-                fieldVal: 'auto'
-            }, {
                 fieldKey: 'spaceSymbol',
                 fieldVal: '+'
             }

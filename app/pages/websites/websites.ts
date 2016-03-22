@@ -55,7 +55,7 @@ export class WebsitesPage {
     }
 
     addWebsite() {
-        const itemModal = Modal.create(WebsiteModal, {});
+        const itemModal = Modal.create(WebsiteModal, {editType: 'auto'});
         itemModal.onDismiss(data => {
             if (data) {
                 this.websiteStorage.setItem(data);
@@ -65,6 +65,7 @@ export class WebsitesPage {
     }
 
     editWebsite(item) {
+        item.editType = 'custom';
         const editItemModal = Modal.create(WebsiteModal, item);
         editItemModal.onDismiss(data => {
             if (data) {

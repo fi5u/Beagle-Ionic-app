@@ -8,14 +8,14 @@
     <ion-title>Website</ion-title>
 
     <ion-buttons end>
-        <button (click)="saveData()" [disabled]="!customForm.valid && !autoForm.valid">
+        <button (click)="saveData()" [disabled]="(item.editType === 'custom' && !customForm.valid) || (item.editType === 'auto' && !autoForm.valid)">
             Save
         </button>
     </ion-buttons>
 </ion-navbar>
 
 <form>
-    <ion-segment [(ngModel)]="item.editType">
+    <ion-segment [(ngModel)]="item.editType" *ngIf="!item.id">
         <ion-segment-button value="auto">Auto</ion-segment-button>
         <ion-segment-button value="custom">Custom</ion-segment-button>
     </ion-segment>
