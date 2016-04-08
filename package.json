@@ -21,5 +21,9 @@
     "webpack": "1.12.14"
   },
   "name": "beagleapp4",
-  "description": "BeagleApp4: An Ionic project"
+  "description": "BeagleApp4: An Ionic project",
+  "cordovaPlugins": [
+    "ionic-plugin-keyboard"
+  ],
+  "cordovaPlatforms": []
 }
