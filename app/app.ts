@@ -1,14 +1,16 @@
-import {App, IonicApp, Platform} from 'ionic-angular';
+import {App, Config, IonicApp, Platform} from 'ionic-angular';
 import {GettingStartedPage} from './pages/getting-started/getting-started';
 import {ListPage} from './pages/list/list';
 import {WebsitesPage} from './pages/websites/websites';
 import {WebsiteStorageService} from './storage/website-storage';
 import {Keyboard} from 'ionic-native';
+//import {enableProdMode} from 'angular2/core';
+//enableProdMode();
 
 @App({
     templateUrl: 'build/app.html',
     config: {
-        developmentMode: 'dev', // dev / prod
+        developmentMode: 'prod', // dev / prod
         pathAuto: {
             dev: 'http://dev.beagle/utils/autotemplate.php',
             prod: 'https://utils.d24studio.com/beagle/autotemplate.php'
