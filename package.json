@@ -24,7 +24,8 @@
   "name": "beagleapp4",
   "description": "BeagleApp4: An Ionic project",
   "cordovaPlugins": [
-    "ionic-plugin-keyboard"
+    "ionic-plugin-keyboard",
+    "cordova-plugin-inappbrowser"
   ],
   "cordovaPlatforms": []
 }

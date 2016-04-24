@@ -98,6 +98,6 @@ export class WebsitesPage {
         const url = this.items[i].url.replace(this.config.get('searchPlaceholder'), query);
         event.stopPropagation();
         console.log('Clicked: ' + i + ' - ' + this.itemQuery[i]);
-        window.open(url, '_system', 'location=yes,enableViewportScale=yes');
+        open(url, '_system', 'location=yes,enableViewportScale=yes');
     }
 }
