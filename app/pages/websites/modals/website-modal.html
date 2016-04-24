@@ -29,7 +29,7 @@
                     <ion-icon name="arrow-dropright-circle"></ion-icon>
                 </button>
                 <ion-item>
-                    <ion-label floating>Website address</ion-label>
+                    <ion-label stacked>Website address</ion-label>
                     <ion-input type="url" [(ngModel)]="item.autoUrl" ngControl="autoUrl" [disabled]="searchInProgress" bglHttpPrefix></ion-input>
                 </ion-item>
             </ion-list>
@@ -38,11 +38,11 @@
         <div *ngSwitchWhen="'custom'" [ngFormModel]="customForm">
             <ion-list>
                 <ion-item>
-                    <ion-label floating>Title</ion-label>
+                    <ion-label stacked>Title</ion-label>
                     <ion-input type="text" [(ngModel)]="item.title" ngControl="title"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-label floating>Website address</ion-label>
+                    <ion-label stacked>Website address</ion-label>
                     <ion-input type="url" [(ngModel)]="item.url" ngControl="url" bglHttpPrefix></ion-input>
                 </ion-item>
             </ion-list>
