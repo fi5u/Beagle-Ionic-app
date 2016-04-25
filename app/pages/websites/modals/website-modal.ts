@@ -3,6 +3,7 @@ import {Control, FormBuilder, Validators} from 'angular2/common';
 import {AutoUrlService} from '../services/auto-url.service';
 import {BglValidators} from '../../../utils/validators';
 import {HttpPrefixDirective} from '../../../utils/directives/http-prefix.directive';
+import {Keyboard} from 'ionic-native';
 
 @Page({
     templateUrl: 'build/pages/websites/modals/website-modal.html',
@@ -78,6 +79,7 @@ export class WebsiteModal {
     }
 
     fetchAutoUrl(url) {
+        Keyboard.close();
         window.setTimeout(() => {
             this.searchInProgress = true;
         });
