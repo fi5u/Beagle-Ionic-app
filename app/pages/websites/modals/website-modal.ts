@@ -22,6 +22,7 @@ export class WebsiteModal {
     showError: boolean;
     error: string;
     errorTimeout: any;
+    searchTimeout: any;
 
     constructor(viewCtrl: ViewController, fb: FormBuilder, bglValidators: BglValidators, autoUrlService: AutoUrlService) {
         this.viewCtrl = viewCtrl;
@@ -87,8 +88,16 @@ export class WebsiteModal {
         window.setTimeout(() => {
             this.searchInProgress = true;
         });
+        this.searchTimeout = setTimeout(() => {
+            this.searchInProgress = false;
+            this.error = this.getErrorMsg('timedout');
+            this.shouldShowError();
+        }, 10000);
         this.autoUrlService.fetchUrl(url).subscribe(
             data => {
+                if(!this.searchInProgress) {
+                    return false
+                }
                 if(data.status === 'success') {
                     const template = this.autoUrlService.getUrlTemplate(data);
                     Object.assign(this.item, template);
@@ -120,6 +129,7 @@ export class WebsiteModal {
         if(errCode === 'nobody') { return 'There was an error with the page. Try again or use the custom form.'; }
         if(errCode === 'ntwerr') { return 'We couldn’t connect to the page. Check that the address is correct and try again. Alternatively, use the custom form.'; }
         if(errCode === 'timedout') { return 'It took too long. Try again or use the custom form.'; }
+        if(errCode === 'btnnf') { return 'Couldn’t find a search box on the page. Try again or use the custom form.'; }
         return errCode;
     }
 
