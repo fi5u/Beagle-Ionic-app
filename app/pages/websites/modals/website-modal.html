@@ -33,6 +33,9 @@
                     <ion-label stacked>Website address</ion-label>
                     <ion-input type="url" [(ngModel)]="item.autoUrl" ngControl="autoUrl" [disabled]="searchInProgress" bglHttpPrefix></ion-input>
                 </ion-item>
+                <ion-item *ngIf="showError" (click)="hideError()">
+                    {{error}}
+                </ion-item>
             </ion-list>
         </div>
 

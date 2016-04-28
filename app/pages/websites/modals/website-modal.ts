@@ -19,6 +19,9 @@ export class WebsiteModal {
     searchInProgress: boolean;
     advancedSection: { isOpen: boolean };
     autoUrlService: any;
+    showError: boolean;
+    error: string;
+    errorTimeout: any;
 
     constructor(viewCtrl: ViewController, fb: FormBuilder, bglValidators: BglValidators, autoUrlService: AutoUrlService) {
         this.viewCtrl = viewCtrl;
@@ -26,6 +29,7 @@ export class WebsiteModal {
         this.autoUrlService = autoUrlService;
         this.itemOriginal = JSON.parse(JSON.stringify(this.item));
         this.searchInProgress = false;
+        this.showError = false;
 
         this.autoForm = fb.group({
             'autoUrl': ['', Validators.compose([Validators.required, bglValidators.weburl])]
@@ -91,7 +95,8 @@ export class WebsiteModal {
                     this.saveData();
                 }
                 else {
-                    console.log('Failed: ' + data.status);
+                    this.error = this.getErrorMsg(data.status);
+                    this.shouldShowError();
                 }
             },
             err => {
@@ -99,8 +104,27 @@ export class WebsiteModal {
             },
             () => {
                 this.searchInProgress = false;
-                console.log('Auto fetch URL complete');
             }
         );
+    }
+
+    shouldShowError() {
+        this.showError = true;
+
+        this.errorTimeout = setTimeout(() => {
+            this.showError = false;
+        }, 5000);
+    }
+
+    getErrorMsg(errCode) {
+        if(errCode === 'nobody') { return 'There was an error with the page. Try again or use the custom form.'; }
+        if(errCode === 'ntwerr') { return 'We couldn’t connect to the page. Check that the address is correct and try again. Alternatively, use the custom form.'; }
+        if(errCode === 'timedout') { return 'It took too long. Try again or use the custom form.'; }
+        return errCode;
+    }
+
+    hideError() {
+        clearTimeout(this.errorTimeout);
+        this.showError = false;
     }
 }
