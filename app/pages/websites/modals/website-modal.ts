@@ -89,14 +89,16 @@ export class WebsiteModal {
             this.searchInProgress = true;
         });
         this.searchTimeout = setTimeout(() => {
-            this.searchInProgress = false;
-            this.error = this.getErrorMsg('timedout');
-            this.shouldShowError();
-        }, 10000);
+            if(this.searchInProgress) {
+                this.searchInProgress = false;
+                this.error = this.getErrorMsg('timedout');
+                this.shouldShowError();
+            }
+        }, 12000);
         this.autoUrlService.fetchUrl(url).subscribe(
             data => {
                 if(!this.searchInProgress) {
-                    return false
+                    return false;
                 }
                 if(data.status === 'success') {
                     const template = this.autoUrlService.getUrlTemplate(data);
