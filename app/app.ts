@@ -2,6 +2,7 @@ import {App, Config, IonicApp, Platform} from 'ionic-angular';
 import {GettingStartedPage} from './pages/getting-started/getting-started';
 import {ListPage} from './pages/list/list';
 import {WebsitesPage} from './pages/websites/websites';
+import {TrackingService} from './utils/services/tracking';
 import {WebsiteStorageService} from './storage/website-storage';
 import {Keyboard} from 'ionic-native';
 //import {enableProdMode} from 'angular2/core';
@@ -10,20 +11,24 @@ import {Keyboard} from 'ionic-native';
 @App({
     templateUrl: 'build/app.html',
     config: {
-        developmentMode: 'prod', // dev / prod
+        developmentMode: 'dev', // dev / prod
         pathAuto: {
             dev: 'http://dev.beagle/utils/autotemplate.php',
             prod: 'https://utils.d24studio.com/beagle/autotemplate.php'
         },
+        pathTracking: {
+            dev: 'http://dev.beagle/utils/tracking.php',
+            prod: 'https://utils.d24studio.com/beagle/tracking.php'
+        },
         searchPlaceholder: '[?]'
     }, // http://ionicframework.com/docs/v2/api/config/Config/
-    providers: [WebsiteStorageService]
+    providers: [WebsiteStorageService, TrackingService]
 })
 class MyApp {
     rootPage: any = WebsitesPage;
     pages: Array<{title: string, component: any}>
 
-    constructor(private app: IonicApp, private platform: Platform, private websiteStorage: WebsiteStorageService) {
+    constructor(private app: IonicApp, private platform: Platform, private websiteStorage: WebsiteStorageService, private tracking: TrackingService) {
         this.initializeApp();
         websiteStorage.initializeStorage();
 
@@ -33,6 +38,8 @@ class MyApp {
             { title: 'List', component: ListPage },
             { title: 'Websites', component: WebsitesPage }
         ];
+
+        tracking.saveProperty('last activity', new Date().toISOString());
     }
 
     initializeApp() {
