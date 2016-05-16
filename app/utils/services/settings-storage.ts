@@ -1,7 +1,6 @@
 import {Injectable} from 'angular2/core';
 import {Config, Events, SqlStorage, Storage} from 'ionic-angular';
 import {Device} from 'ionic-native';
-import {TrackingService} from './tracking';
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -11,13 +10,9 @@ export class SettingsStorageService {
 
     constructor(
         private config: Config,
-        private events: Events,
-        private tracking: TrackingService
+        private events: Events
         ) {
         this.storage = new Storage(SqlStorage);
-        this.events.subscribe('settings:fetched', (settings) => {
-            this.tracking.user = this.tracking.getUser();
-        });
     }
 
     initializeSettingsStorage() {
@@ -74,7 +69,7 @@ export class SettingsStorageService {
         // Save to storage
         this.storage.query(`INSERT OR REPLACE INTO settings (name, value) VALUES ("${name}", "${value}")`)
         // Save to config
-        this.config.set('', name, value);
+        this.config.set(name, value);
         this.events.publish('settings:' + name + ':fetched', value);
     }
 

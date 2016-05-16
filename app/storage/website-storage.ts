@@ -11,7 +11,7 @@ export class WebsiteStorageService {
     SqlStorage: any;
 
     constructor(
-        private events: Events,
+        private events: Events
     ) {
         this.tableName = 'websites';
         this.storage = new Storage(SqlStorage);

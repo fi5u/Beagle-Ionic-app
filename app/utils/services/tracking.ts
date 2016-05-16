@@ -16,6 +16,7 @@ export class TrackingService {
         private events: Events,
         private http: Http
         ) {
+        console.log('TRACKING INSTANTIATED!');
         this.trackingSchedule = window.setInterval(() => {
             this.scheduleTracking();
         }, 30000);
@@ -28,6 +29,7 @@ export class TrackingService {
         const now = new Date();
         const nowString = now.toISOString();
         const data = { type: 'event', user: this.user, event: event, value: value, timestamp: nowString };
+        this.saveProperty('last activity', nowString);
         if(data.user.length) {
             this.trackingData.push(data);
         }

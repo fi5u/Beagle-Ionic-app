@@ -2,6 +2,7 @@ import {Config, Events, IonicApp, Modal, NavController, NavParams, Page, Platfor
 import {WebsiteModal} from './modals/website-modal';
 import {AutoFocusDirective} from '../../utils/directives/auto-focus.directive';
 import {WebsiteStorageService} from '../../storage/website-storage';
+import {TrackingService} from '../../utils/services/tracking';
 
 @Page({
     templateUrl: 'build/pages/websites/websites.html',
@@ -14,7 +15,15 @@ export class WebsitesPage {
     items: Array<{ id: number, title: string, url: string, spaceSymbol: string }>;
     list: any;
 
-    constructor(private app: IonicApp, private config: Config, private nav: NavController, private events: Events, private platform: Platform, public websiteStorage: WebsiteStorageService) {
+    constructor(
+        private app: IonicApp,
+        private config: Config,
+        private nav: NavController,
+        private events: Events,
+        private platform: Platform,
+        private websiteStorage: WebsiteStorageService,
+        private tracking: TrackingService
+        ) {
         this.app = app;
         this.nav = nav;
         this.items = [];
@@ -85,6 +94,9 @@ export class WebsitesPage {
             if (!this.itemSelected[i]) { this.itemSelected = []; }
             this.itemSelected[i] = this.itemSelected[i] ? false : true;
             this.list.enableSlidingItems(!this.itemSelected[i]);
+            let originalState = this.itemSelected[i] ? 'closed' : 'open';
+            let newState = this.itemSelected[i] ? 'open' : 'closed';
+            this.tracking.saveEvent('list item tapped', { was: originalState, now: newState });
         });
     }
 
