@@ -1,9 +1,10 @@
-import {App, Config, IonicApp, Platform} from 'ionic-angular';
+import {App, IonicApp, Platform, Storage, SqlStorage} from 'ionic-angular';
 import {GettingStartedPage} from './pages/getting-started/getting-started';
 import {ListPage} from './pages/list/list';
 import {WebsitesPage} from './pages/websites/websites';
 import {TrackingService} from './utils/services/tracking';
 import {WebsiteStorageService} from './storage/website-storage';
+import {SettingsStorageService} from './utils/services/settings-storage';
 import {Keyboard} from 'ionic-native';
 //import {enableProdMode} from 'angular2/core';
 //enableProdMode();
@@ -22,27 +23,32 @@ import {Keyboard} from 'ionic-native';
         },
         searchPlaceholder: '[?]'
     }, // http://ionicframework.com/docs/v2/api/config/Config/
-    providers: [WebsiteStorageService, TrackingService]
+    providers: [WebsiteStorageService, SettingsStorageService, TrackingService]
 })
 class MyApp {
     rootPage: any = WebsitesPage;
     pages: Array<{title: string, component: any}>
+    data: Array<{id: number, name: string, value: string}>;
 
-    constructor(private app: IonicApp, private platform: Platform, private websiteStorage: WebsiteStorageService, private tracking: TrackingService) {
+    constructor(
+        private app: IonicApp,
+        private platform: Platform,
+        private settingsStorage: SettingsStorageService,
+        private tracking: TrackingService,
+        private websiteStorage: WebsiteStorageService
+        ) {
         this.initializeApp();
-        websiteStorage.initializeStorage();
-
-        // used for an example of ngFor and navigation
         this.pages = [
             { title: 'Getting Started', component: GettingStartedPage },
             { title: 'List', component: ListPage },
             { title: 'Websites', component: WebsitesPage }
         ];
-
-        tracking.saveProperty('last activity', new Date().toISOString());
+        this.tracking.saveProperty('last activity', new Date().toISOString());
     }
 
     initializeApp() {
+        this.websiteStorage.initializeStorage();
+        this.settingsStorage.initializeSettingsStorage();
         this.platform.ready().then(() => {
             Keyboard.hideKeyboardAccessoryBar(true);
         });
