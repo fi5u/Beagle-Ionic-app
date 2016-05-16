@@ -10,10 +10,11 @@ export class WebsiteStorageService {
     Storage: any;
     SqlStorage: any;
 
-    constructor(private events: Events) {
+    constructor(
+        private events: Events,
+    ) {
         this.tableName = 'websites';
         this.storage = new Storage(SqlStorage);
-        this.events = events;
     }
 
     initializeStorage() {
