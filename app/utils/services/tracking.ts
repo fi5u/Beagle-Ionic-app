@@ -16,7 +16,6 @@ export class TrackingService {
         private events: Events,
         private http: Http
         ) {
-        console.log('TRACKING INSTANTIATED!');
         this.trackingSchedule = window.setInterval(() => {
             this.scheduleTracking();
         }, 30000);
@@ -41,10 +40,34 @@ export class TrackingService {
     saveProperty(property, value) {
         const data = { type: 'prop', user: this.user, prop: property, value: value };
         if(data.user.length) {
-            this.trackingData.push(data);
+            let duplicatedIt;
+            for(let i = 0; i < this.trackingData.length; i++) {
+                if(this.trackingData[i]['prop'] === property) {
+                    duplicatedIt = i;
+                    break;
+                }
+            }
+            if(typeof(duplicatedIt) !== 'undefined') {
+                this.trackingData[duplicatedIt]['value'] = data.value;
+            }
+            else {
+                this.trackingData.push(data);
+            }
         }
         else {
-            this.saveUnregisteredUserTracking(data);
+            let duplicatedIt;
+            for(let i = 0; i < this.unregisteredUserTracking.length; i++) {
+                if(this.unregisteredUserTracking[i]['prop'] === property) {
+                    duplicatedIt = i;
+                    break;
+                }
+            }
+            if(typeof(duplicatedIt) !== 'undefined') {
+                this.unregisteredUserTracking[duplicatedIt]['value'] = data.value;
+            }
+            else {
+                this.saveUnregisteredUserTracking(data);
+            }
         }
     }
 
