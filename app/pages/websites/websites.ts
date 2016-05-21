@@ -1,7 +1,7 @@
 import {Config, Events, IonicApp, Modal, NavController, NavParams, Page, Platform} from 'ionic-angular';
 import {WebsiteModal} from './modals/website-modal';
 import {AutoFocusDirective} from '../../utils/directives/auto-focus.directive';
-import {WebsiteStorageService} from '../../storage/website-storage';
+import {WebsiteStorageService} from '../../utils/services/website-storage';
 import {TrackingService} from '../../utils/services/tracking';
 
 @Page({

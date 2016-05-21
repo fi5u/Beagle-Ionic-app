@@ -3,7 +3,7 @@ import {GettingStartedPage} from './pages/getting-started/getting-started';
 import {ListPage} from './pages/list/list';
 import {WebsitesPage} from './pages/websites/websites';
 import {TrackingService} from './utils/services/tracking';
-import {WebsiteStorageService} from './storage/website-storage';
+import {WebsiteStorageService} from './utils/services/website-storage';
 import {SettingsStorageService} from './utils/services/settings-storage';
 import {Keyboard} from 'ionic-native';
 //import {enableProdMode} from 'angular2/core';

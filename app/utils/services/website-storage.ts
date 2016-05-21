@@ -1,7 +1,6 @@
 import {Injectable} from 'angular2/core';
 import {Events, Platform, Storage, SqlStorage} from 'ionic-angular';
 
-
 @Injectable()
 export class WebsiteStorageService {
     tableName: string;
