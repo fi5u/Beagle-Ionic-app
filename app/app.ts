@@ -6,6 +6,7 @@ import {TrackingService} from './utils/services/tracking';
 import {WebsiteStorageService} from './utils/services/website-storage';
 import {SettingsStorageService} from './utils/services/settings-storage';
 import {Keyboard} from 'ionic-native';
+
 //import {enableProdMode} from 'angular2/core';
 //enableProdMode();
 
@@ -59,5 +60,6 @@ class MyApp {
         // we wouldn't want the back button to show in this scenario
         let nav = this.app.getComponent('nav');
         nav.setRoot(page.component);
+        this.tracking.saveEvent('navigate', { page: page.title });
     }
 }

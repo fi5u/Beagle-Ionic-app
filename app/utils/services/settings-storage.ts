@@ -2,6 +2,7 @@ import {Injectable} from 'angular2/core';
 import {Config, Events, SqlStorage, Storage} from 'ionic-angular';
 import {Device} from 'ionic-native';
 import 'rxjs/add/operator/map';
+import {TrackingService} from '../../utils/services/tracking';
 
 @Injectable()
 export class SettingsStorageService {
@@ -10,7 +11,8 @@ export class SettingsStorageService {
 
     constructor(
         private config: Config,
-        private events: Events
+        private events: Events,
+        private tracking: TrackingService
         ) {
         this.storage = new Storage(SqlStorage);
     }
@@ -20,6 +22,7 @@ export class SettingsStorageService {
             console.log('SETTINGS TABLE CREATED / SETTINGS TABLE EXISTS -> ' + JSON.stringify(data.res));
             this.getStoredSettings();
         }, (error) => {
+            this.tracking.saveEvent('error', { location: 'settings storage', desc: 'could not create table', error: JSON.stringify(error.err) });
             console.log('ERROR -> ' + JSON.stringify(error.err));
         });
     }
@@ -54,6 +57,7 @@ export class SettingsStorageService {
                 this.events.publish('settings:localStoredUUID:fetched', localStoredUUID);
             }
         }, (error) => {
+            this.tracking.saveEvent('error', { location: 'settings storage', desc: 'could not fetch stored items', error: JSON.stringify(error.err) });
             console.log(error);
         });
     }

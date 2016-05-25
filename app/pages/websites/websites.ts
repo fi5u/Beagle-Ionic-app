@@ -85,8 +85,8 @@ export class WebsitesPage {
         this.nav.present(editItemModal);
     }
 
-    deleteWebsite(id) {
-        this.websiteStorage.deleteItem(id);
+    deleteWebsite(item) {
+        this.websiteStorage.deleteItem(item);
     }
 
     itemTapped(event, item, i) {
@@ -96,7 +96,7 @@ export class WebsitesPage {
             this.list.enableSlidingItems(!this.itemSelected[i]);
             let originalState = this.itemSelected[i] ? 'closed' : 'open';
             let newState = this.itemSelected[i] ? 'open' : 'closed';
-            this.tracking.saveEvent('list item tapped', { was: originalState, now: newState });
+            this.tracking.saveEvent('tap list item', { was: originalState, now: newState, data: {id: item.id, title: item.title, url: item.url, spaceSymbol: item.spaceSymbol} });
         });
     }
 
@@ -109,7 +109,7 @@ export class WebsitesPage {
         const query = this.itemQuery[i].trim().replace(' ', this.items[i].spaceSymbol || '+');
         const url = this.items[i].url.replace(this.config.get('searchPlaceholder'), query);
         event.stopPropagation();
-        console.log('Clicked: ' + i + ' - ' + this.itemQuery[i]);
+        this.tracking.saveEvent('perform query', { query: this.itemQuery[i].trim(), data: {id: this.items[i].id, title: this.items[i].title, url: this.items[i].url, spaceSymbol: this.items[i].spaceSymbol} });
         open(url, '_system', 'location=yes,enableViewportScale=yes');
     }
 }

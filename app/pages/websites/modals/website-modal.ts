@@ -1,9 +1,10 @@
 import {Page, ViewController} from 'ionic-angular';
 import {Control, FormBuilder, Validators} from 'angular2/common';
+import {Keyboard} from 'ionic-native';
 import {AutoUrlService} from '../services/auto-url.service';
 import {BglValidators} from '../../../utils/validators';
 import {HttpPrefixDirective} from '../../../utils/directives/http-prefix.directive';
-import {Keyboard} from 'ionic-native';
+import {TrackingService} from '../../../utils/services/tracking';
 
 @Page({
     templateUrl: 'build/pages/websites/modals/website-modal.html',
@@ -13,21 +14,24 @@ import {Keyboard} from 'ionic-native';
 export class WebsiteModal {
     autoForm: any;
     customForm: any;
-    viewCtrl: any;
     item: any;
     itemOriginal: any;
     searchInProgress: boolean;
     advancedSection: { isOpen: boolean };
-    autoUrlService: any;
     showError: boolean;
     error: string;
     errorTimeout: any;
     searchTimeout: any;
 
-    constructor(viewCtrl: ViewController, fb: FormBuilder, bglValidators: BglValidators, autoUrlService: AutoUrlService) {
+    constructor(
+        private viewCtrl: ViewController,
+        private fb: FormBuilder,
+        private bglValidators: BglValidators,
+        private tracking: TrackingService,
+        private autoUrlService: AutoUrlService
+        ) {
         this.viewCtrl = viewCtrl;
         this.item = viewCtrl.data;
-        this.autoUrlService = autoUrlService;
         this.itemOriginal = JSON.parse(JSON.stringify(this.item));
         this.searchInProgress = false;
         this.showError = false;
@@ -108,6 +112,7 @@ export class WebsiteModal {
                 else {
                     this.error = this.getErrorMsg(data.status);
                     this.shouldShowError();
+                    this.tracking.saveEvent('auto url', { action: 'fetch error', error: data.status });
                 }
             },
             err => {
