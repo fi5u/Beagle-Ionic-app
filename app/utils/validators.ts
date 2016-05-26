@@ -8,6 +8,16 @@ export class BglValidators {
         }
         return null;
     }
+    urlTemplate(c) {
+        //var templateRegex = '/\[\?\]/';
+        //if (c.value && !c.value.match(templateRegex)) {
+        if (c.value && c.value.indexOf('[?]') < 1) {
+            return {
+                urlTemplate: true
+            };
+        }
+        return null;
+    }
     email(c) {
         var emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
         if (c.value && !c.value.match(emailRegex)) {

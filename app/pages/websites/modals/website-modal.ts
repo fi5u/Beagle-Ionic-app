@@ -42,7 +42,7 @@ export class WebsiteModal {
 
         this.customForm = fb.group({
             'title': ['', Validators.required],
-            'url': ['', Validators.compose([Validators.required, bglValidators.weburl])],
+            'url': ['', Validators.compose([Validators.required, bglValidators.weburl, bglValidators.urlTemplate])],
             'spaceSymbol': ['', Validators.required]
         });
 
