@@ -8,9 +8,7 @@
     <ion-title>Website</ion-title>
 
     <ion-buttons end>
-        <!-- [disabled]="(item.editType === 'custom' && !customForm.valid) || (item.editType === 'auto' && !autoForm.valid)" -->
-        <!-- [disabled]="customForm.valid === null ? false : !customForm.valid" -->
-        <button (click)="saveData()" [disabled]="false">
+        <button (click)="saveData()" [disabled]="(item.editType === 'custom' && !customForm.valid) || (item.editType === 'auto' && !autoForm.valid)">
             Save
         </button>
     </ion-buttons>
