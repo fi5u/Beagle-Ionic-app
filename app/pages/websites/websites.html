@@ -16,7 +16,7 @@
 
 <ion-content>
     <ion-list id="websites">
-        <ion-item-sliding *ngFor="#item of items; var i = index;">
+        <ion-item-sliding [class.is-selected]="itemSelected[i]" *ngFor="#item of items; var i = index;">
             <ion-item (click)="itemTapped($event, item, i)" detail-none>
                 <button item-right clear (click)="sendQuery($event, i)" [disabled]="!itemQuery[i]" [hidden]="!itemSelected[i]">
                     <ion-icon name="arrow-forward"></ion-icon>

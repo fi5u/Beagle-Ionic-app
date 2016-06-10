@@ -42,7 +42,7 @@ ion-item-sliding.active-slide .item.activated {
     position: relative;
     right: -8px;
     width: 65px;
-    height: 90px;
+    height: 66px;
     margin: 0;
     background: map-get($colors, primary);
     opacity: 1;
@@ -57,9 +57,20 @@ ion-item-sliding.active-slide .item.activated {
     }
 }
 
+ion-list > .item:first-child,
+ion-list > ion-item-sliding:first-child .item {
+    border-top: none;
+}
+
 ion-list > .item:last-child,
 ion-list > ion-item-sliding:last-child .item {
     border-bottom: none;
+}
+
+ion-list {
+    .item-inner {
+        border-bottom: none;
+    }
 }
 
 // BUTTONS
@@ -67,10 +78,29 @@ ion-list > ion-item-sliding:last-child .item {
     color: #fff;
 }
 
+.item-input .button {
+    .is-selected & {
+        height: 72px;
+    }
+}
+
 // LABEL
 .item-input {
     ion-label {
         max-width: 100%;
+
+        .is-selected & {
+            margin-top: 8px;
+            margin-bottom: 0;
+            font-size: 12px;
+
+            color: rgba(255, 255, 255, 0.5);
+
+            ion-input {
+                font-size: 16px;
+                color: #fff;
+            }
+        }
     }
 }
 
