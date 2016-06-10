@@ -1,9 +1,5 @@
 // http://ionicframework.com/docs/v2/theming/
 
-.website-modal ion-label {
-    white-space: normal;
-}
-
 // App Shared Imports
 // --------------------------------------------------
 // These are the imports which make up the design of this app.
@@ -13,6 +9,16 @@
 @import "../pages/getting-started/getting-started";
 
 @import "../pages/list/list";
+
+// GLOBAL
+body {
+    font-weight: 400;
+}
+
+// TOOLBAR
+.toolbar-title {
+    font-weight: 400;
+}
 
 // LIST
 .item {
@@ -114,6 +120,10 @@ ion-list {
             }
         }
     }
+}
+
+.website-modal ion-label {
+    white-space: normal;
 }
 
 // INPUT
