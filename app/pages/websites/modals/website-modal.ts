@@ -17,7 +17,6 @@ export class WebsiteModal {
     item: any;
     itemOriginal: any;
     searchInProgress: boolean;
-    advancedSection: { isOpen: boolean };
     showError: boolean;
     error: string;
     errorTimeout: any;
@@ -46,9 +45,6 @@ export class WebsiteModal {
             'spaceSymbol': ['', Validators.required]
         });
 
-        this.advancedSection = {
-            isOpen: false
-        }
         this.setDefaults();
     }
 
@@ -81,10 +77,6 @@ export class WebsiteModal {
 
     saveData() {
         this.viewCtrl.dismiss(this.item);
-    }
-
-    advancedSectionToggle(open) {
-        this.advancedSection.isOpen = !this.advancedSection.isOpen || open ? true : false;
     }
 
     fetchAutoUrl(url) {

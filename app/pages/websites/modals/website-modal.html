@@ -47,17 +47,9 @@
                     <ion-label stacked>Website address</ion-label>
                     <ion-input type="url" [(ngModel)]="item.url" ngControl="url" bglHttpPrefix></ion-input>
                 </ion-item>
-            </ion-list>
-
-            <ion-list>
-                <ion-list-header (click)="advancedSectionToggle()">
-                    Advanced
-                    <ion-icon name="arrow-{{advancedSection.isOpen ? 'up' : 'down'}}" item-right></ion-icon>
-                </ion-list-header>
-
-                <ion-item [hidden]="!advancedSection.isOpen">
+                <ion-item>
                     <ion-label>Symbol to represent space</ion-label>
-                    <ion-select [(ngModel)]="item.spaceSymbol" ngControl="spaceSymbol" (focus)="advancedSectionToggle(true)">
+                    <ion-select [(ngModel)]="item.spaceSymbol" ngControl="spaceSymbol">
                         <ion-option value="+">+</ion-option>
                         <ion-option value="%20">%20</ion-option>
                     </ion-select>
