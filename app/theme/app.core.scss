@@ -122,3 +122,19 @@ ion-list {
         margin-left: 0;
     }
 }
+
+ion-input::after {
+    right: 65px;
+    left: 0;
+}
+
+ion-input.ng-invalid.ng-touched::after {
+    border-bottom-color: darken(map-get($colors, primary), 20%);
+}
+
+// SELECT
+.item-select {
+    ion-label {
+        font-size: 1.2rem;
+    }
+}
