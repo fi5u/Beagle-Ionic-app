@@ -21,10 +21,39 @@
 // are different per mode.
 
 $colors: (
-  primary:    #387ef5,
+  primary:    #dd2244,
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222,
+  dark:       #2c2c3d,
   favorite:   #69BB7B
 );
+
+// TYPOGRAPHY
+$font-family-base: "Lato", -apple-system, "Helvetica Neue", "Roboto", sans-serif;
+$font-family-md-base: $font-family-base;
+$font-family-wp-base: $font-family-base;
+$text-color: #fff;
+$link-color: #d24;
+
+// SCREEN
+$background-color: map-get($colors, dark);
+
+// TOOLBAR
+$toolbar-background: map-get($colors, dark);
+$toolbar-border-color: map-get($colors, dark);
+$toolbar-md-button-color: map-get($colors, primary);
+$toolbar-wp-button-color: map-get($colors, primary);
+$toolbar-md-text-color: #fff;
+$toolbar-wp-text-color: #fff;
+
+// LIST
+$list-background-color: #545461;
+$list-border-color: transparent;
+$list-md-border-color: transparent;
+$list-wp-border-color: transparent;
+
+// LABEL
+$label-ios-text-color: #fff;
+$label-md-text-color: #fff;
+$label-wp-text-color: #fff;

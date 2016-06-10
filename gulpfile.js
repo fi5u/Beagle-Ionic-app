@@ -63,9 +63,26 @@ gulp.task('build', ['clean'], function(done){
   );
 });
 
-gulp.task('sass', buildSass);
+gulp.task('sass', function() {
+  return buildSass({
+      sassOptions: {
+        includePaths: [
+          'node_modules/ionic-angular',
+          'node_modules/ionicons/dist/scss',
+          'node_modules/lato-font/css/lato-font.css'
+        ]
+      }
+    });
+});
 gulp.task('html', copyHTML);
-gulp.task('fonts', copyFonts);
+gulp.task('fonts', function() {
+  return copyFonts({
+    src: [
+      'node_modules/ionic-angular/fonts/**/*.+(ttf|woff|woff2)',
+      'node_modules/lato-font/fonts/**/*.+(ttf|woff|eot)'
+    ]
+  });
+});
 gulp.task('scripts', copyScripts);
 gulp.task('clean', function(){
   return del('www/build');

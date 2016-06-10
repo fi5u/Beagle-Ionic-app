@@ -13,3 +13,70 @@
 @import "../pages/getting-started/getting-started";
 
 @import "../pages/list/list";
+
+// LIST
+ion-item-sliding {
+    margin-bottom: 1px;
+}
+
+ion-item-options {
+    .button {
+        border-right: 1px solid map-get($colors, dark);
+
+        &:last-child {
+            border-right: none;
+        }
+    }
+}
+
+ion-item-sliding {
+    background-color: map-get($colors, dark);
+}
+
+ion-item-sliding.active-slide .item,
+ion-item-sliding.active-slide .item.activated {
+    box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.2);
+}
+
+.item-input .button {
+    position: relative;
+    right: -8px;
+    width: 65px;
+    height: 90px;
+    margin: 0;
+    background: map-get($colors, primary);
+    opacity: 1;
+    border-radius: 0;
+
+    &[disabled] {
+        background: rgba(255, 255, 255, 0.1);
+
+        ion-icon {
+            color: rgba(255, 255, 255, 0.2);
+        }
+    }
+}
+
+ion-list > .item:last-child,
+ion-list > ion-item-sliding:last-child .item {
+    border-bottom: none;
+}
+
+// BUTTONS
+.button-clear {
+    color: #fff;
+}
+
+// LABEL
+.item-input {
+    ion-label {
+        max-width: 100%;
+    }
+}
+
+// INPUT
+.websites-page {
+    .text-input {
+        margin-left: 0;
+    }
+}
