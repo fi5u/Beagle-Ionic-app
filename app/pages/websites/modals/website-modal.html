@@ -6,12 +6,6 @@
     </ion-buttons>
 
     <ion-title>Website</ion-title>
-
-    <ion-buttons end>
-        <button (click)="saveData()" [disabled]="(item.editType === 'custom' && !customForm.valid) || (item.editType === 'auto' && !autoForm.valid)">
-            Save
-        </button>
-    </ion-buttons>
 </ion-navbar>
 
 <form class="website-modal">
@@ -55,6 +49,7 @@
                     </ion-select>
                 </ion-item>
             </ion-list>
+            <button full (click)="saveData()" [disabled]="!customForm.valid" class="btn-list-full"><ion-icon name="checkmark"></ion-icon></button>
         </div>
     </div>
 </form>
