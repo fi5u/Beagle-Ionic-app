@@ -5,15 +5,15 @@ import {WebsitesPage} from './pages/websites/websites';
 import {TrackingService} from './utils/services/tracking';
 import {WebsiteStorageService} from './utils/services/website-storage';
 import {SettingsStorageService} from './utils/services/settings-storage';
-import {Keyboard} from 'ionic-native';
+import {Keyboard, StatusBar} from 'ionic-native';
 
-//import {enableProdMode} from 'angular2/core';
-//enableProdMode();
+import {enableProdMode} from 'angular2/core';
+enableProdMode();
 
 @App({
     templateUrl: 'build/app.html',
     config: {
-        developmentMode: 'dev', // dev / prod
+        developmentMode: 'prod', // dev / prod
         pathAuto: {
             dev: 'http://dev.beagle/utils/autotemplate.php',
             prod: 'https://utils.d24studio.com/beagle/autotemplate.php'
@@ -52,6 +52,7 @@ class MyApp {
         this.settingsStorage.initializeSettingsStorage();
         this.platform.ready().then(() => {
             Keyboard.hideKeyboardAccessoryBar(true);
+            StatusBar.styleLightContent();
         });
     }
 
