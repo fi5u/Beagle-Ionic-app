@@ -28,11 +28,7 @@
     "ionic-plugin-keyboard"
   ],
   "cordovaPlatforms": [
-    {
-      "platform": "ios",
-      "version": "",
-      "locator": "ios"
-    }
+    "ios"
   ],
   "name": "Beagle",
   "description": "Beagle: Get your search results, faster"
