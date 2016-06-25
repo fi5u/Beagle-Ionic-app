@@ -22,7 +22,7 @@ body {
 
 // LIST
 .item {
-    margin-bottom: 1px;
+
 }
 
 ion-item-options {
@@ -37,9 +37,10 @@ ion-item-options {
 }
 
 ion-item-sliding {
-    background-color: map-get($colors, dark);
     height: 45px;
+    margin-bottom: 1px;
 
+    background-color: map-get($colors, dark);
     transition: height .2s .3s; // OUT
 
     &.is-selected {
