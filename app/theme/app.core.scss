@@ -28,7 +28,6 @@ body {
 ion-item-options {
     .button {
         border-right: 1px solid map-get($colors, dark);
-        border-bottom: 1px solid map-get($colors, dark);
 
         &:last-child {
             border-right: none;
